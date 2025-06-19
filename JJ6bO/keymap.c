@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          HSV_0_0_255,    HSV_172_255_255,HSV_122_255_128,HSV_27_255_255, HSV_215_255_128,KC_TRANSPARENT,                                 KC_SYSTEM_SLEEP,KC_NO,          AU_TOGG,        MU_TOGG,        MU_NEXT,        KC_NO,          KC_NO,          
     KC_NO,          HSV_0_255_255,  HSV_129_186_206,HSV_112_251_220,HSV_52_255_255, HSV_220_255_255,QK_BOOT,                                                                        KC_SYSTEM_POWER,KC_NO,          KC_NO,          KC_NO,          RGB_MODE_FORWARD,KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          RGB_SPD,        RGB_SPI,        RGB_SLD,        KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          TOGGLE_LAYER_COLOR,                                                                                                RGB_TOG,        KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    UNICODE_MODE_WIN, UNICODE_MODE_LINUX, UNICODE_MODE_MAC, KC_NO,          KC_NO,          TOGGLE_LAYER_COLOR,                                                                                                RGB_TOG,        KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     RGB_HUD,        RGB_HUI,        RGB_VAD,                        RGB_VAI,        RGB_SAI,        RGB_SAD
   ),
 };
@@ -182,12 +182,31 @@ bool rgb_matrix_indicators_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case UNICODE_MODE_WIN:
+      set_unicode_input_mode(UNICODE_MODE_WINDOWS);
+    break;
+    case UNICODE_MODE_MAC:
+      set_unicode_input_mode(UNICODE_MODE_MACOS);
+    break;
+    case UNICODE_MODE_LIN:
+      set_unicode_input_mode(UNICODE_MODE_LINUX);
+    break;
     case ST_MACRO_0:
+    if (record->event.pressed) {
+      send_unicode_string("^\u200C");
+    }
+    break;
+    case ST_MACRO_1:
+    if (record->event.pressed) {
+      send_unicode_string("`\u200C");
+    }
+    break;
+    case ST_MACRO_2:
     if (record->event.pressed) {
       SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_S))));
     }
     break;
-    case ST_MACRO_1:
+    case ST_MACRO_3:
     if (record->event.pressed) {
       SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_DELETE))));
     }
