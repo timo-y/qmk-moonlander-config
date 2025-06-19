@@ -16,6 +16,8 @@ enum custom_keycodes {
   HSV_112_251_220,
   HSV_52_255_255,
   HSV_220_255_255,
+  ST_MACRO_CIRC,
+  ST_MACRO_GRAVE_DOWN,
   ST_MACRO_0,
   ST_MACRO_1,
 };
@@ -52,9 +54,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [1] = LAYOUT_moonlander(
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, DE_RING,        DE_UNDS,        DE_LBRC,        DE_RBRC,        KC_TRANSPARENT, KC_NO,                                          KC_TRANSPARENT, DE_EXLM,        DE_LESS,        DE_MORE,        DE_EQL,         DE_AMPR,        DE_PARA,        
+    KC_TRANSPARENT, DE_RING,        DE_UNDS,        DE_LBRC,        DE_RBRC,        ST_MACRO_CIRC, KC_NO,                                          KC_TRANSPARENT, DE_EXLM,        DE_LESS,        DE_MORE,        DE_EQL,         DE_AMPR,        DE_PARA,        
     KC_TRANSPARENT, DE_BSLS,        DUAL_FUNC_13,   DUAL_FUNC_14,   DUAL_FUNC_15,   DE_ASTR,        KC_TRANSPARENT,                                                                 KC_TRANSPARENT, DE_QST,         DUAL_FUNC_16,   DUAL_FUNC_17,   MT(MOD_RGUI, DE_MINS),DE_COLN,        DE_AT,          
-    KC_TRANSPARENT, DE_HASH,        DE_DLR,         DE_PIPE,        DE_TILD,        KC_TRANSPARENT,                                 DE_PLUS,        DE_PERC,        DE_DQOT,        DE_QUOT,        DE_SCLN,        DE_EURO,        
+    KC_TRANSPARENT, DE_HASH,        DE_DLR,         DE_PIPE,        DE_TILD,        ST_MACRO_GRAVE_DOWN,                                 DE_PLUS,        DE_PERC,        DE_DQOT,        DE_QUOT,        DE_SCLN,        DE_EURO,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, TO(4),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -191,22 +193,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case UNICODE_MODE_LIN:
       set_unicode_input_mode(UNICODE_MODE_LINUX);
     break;
-    case ST_MACRO_0:
+    case ST_MACRO_CIRC:
     if (record->event.pressed) {
       send_unicode_string("^\u200C");
     }
     break;
-    case ST_MACRO_1:
+    case ST_MACRO_GRAVE_DOWN:
     if (record->event.pressed) {
       send_unicode_string("`\u200C");
     }
     break;
-    case ST_MACRO_2:
+    case ST_MACRO_0:
     if (record->event.pressed) {
       SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_S))));
     }
     break;
-    case ST_MACRO_3:
+    case ST_MACRO_1:
     if (record->event.pressed) {
       SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_DELETE))));
     }
