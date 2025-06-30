@@ -56,9 +56,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [1] = LAYOUT_moonlander(
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, DE_RING,        DE_UNDS,        DE_LBRC,        DE_RBRC,        DE_CIRC,        KC_NO,                                          KC_TRANSPARENT, DE_EXLM,        DE_LESS,        DE_MORE,        DE_EQL,         DE_AMPR,        DE_PARA,        
+    KC_TRANSPARENT, DE_RING,        DE_UNDS,        DE_LBRC,        DE_RBRC,        UD_DE_CIRC,        KC_NO,                                          KC_TRANSPARENT, DE_EXLM,        DE_LESS,        DE_MORE,        DE_EQL,         DE_AMPR,        DE_PARA,        
     KC_TRANSPARENT, DUAL_FUNC_13,   DUAL_FUNC_14,   DUAL_FUNC_15,   DUAL_FUNC_16,   DE_ASTR,        KC_TRANSPARENT,                                                                 KC_TRANSPARENT, DE_QST,         DUAL_FUNC_17,   DUAL_FUNC_18,   MT(MOD_RGUI, DE_MINS),DUAL_FUNC_19,   DE_AT,          
-    KC_TRANSPARENT, DE_HASH,        DE_DLR,         DE_PIPE,        DE_TILD,        DE_GRV,                                         DE_PLUS,        DE_PERC,        DE_DQOT,        DE_QUOT,        DE_SCLN,        DE_EURO,        
+    KC_TRANSPARENT, DE_HASH,        DE_DLR,         DE_PIPE,        DE_TILD,        UD_DE_GRV,                                         DE_PLUS,        DE_PERC,        DE_DQOT,        DE_QUOT,        DE_SCLN,        DE_EURO,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, TO(4),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -188,6 +188,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_DELETE))));
     }
     break;
+
+    case UD_DE_CIRC:
+    if (record->event.pressed) {
+      register_code16(DE_CIRC);
+      unregister_code16(DE_CIRC);
+      register_code16(KC_SPACE);
+      unregister_code16(KC_SPACE);
+    }
+    break;
+    case UD_DE_GRAVE:
+    if (record->event.pressed) {
+      register_code16(DE_GRV);
+      unregister_code16(DE_GRV);
+      register_code16(KC_SPACE);
+      unregister_code16(KC_SPACE);
+    }
 
     case DUAL_FUNC_0:
       if (record->tap.count > 0) {
