@@ -199,7 +199,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       unregister_code16(KC_SPACE);
     }
     break;
-    case UD_DE_GRAVE:
+    case UD_DE_GRV:
     if (record->event.pressed) {
       register_code16(DE_GRV);
       unregister_code16(DE_GRV);
