@@ -20,6 +20,8 @@ enum custom_keycodes {
   HSV_220_255_255,
   ST_MACRO_0,
   ST_MACRO_1,
+  UD_DE_CIRC,
+  UD_DE_GRV,
 };
 
 
