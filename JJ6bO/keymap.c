@@ -193,18 +193,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case UD_DE_CIRC:
     if (record->event.pressed) {
-      register_code16(DE_CIRC);
-      unregister_code16(DE_CIRC);
-      register_code16(KC_SPACE);
-      unregister_code16(KC_SPACE);
+      tab_code16(DE_CIRC);
+      tab_code16(KC_SPACE);
     }
     break;
     case UD_DE_GRV:
     if (record->event.pressed) {
-      register_code16(DE_GRV);
-      unregister_code16(DE_GRV);
-      register_code16(KC_SPACE);
-      unregister_code16(KC_SPACE);
+      tap_code16(DE_GRV);
+      tap_code16(KC_SPACE);
     }
 
     case DUAL_FUNC_0:
