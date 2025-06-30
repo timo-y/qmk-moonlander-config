@@ -202,6 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(DE_GRV);
       tap_code16(KC_SPACE);
     }
+    break;
 
     case DUAL_FUNC_0:
       if (record->tap.count > 0) {
